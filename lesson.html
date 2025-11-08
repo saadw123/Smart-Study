@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+    <script>
+        // **الكود النهائي لمنع الوميض (Anti-FOUC) - يجب وضعه كأول شيء داخل <head>**
+        (function() {
+            const theme = localStorage.getItem('theme');
+            // نطبق الكلاس مباشرة على عنصر الجذر <html>
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode'); 
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <title>الدروس - Smart Study</title>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo-container">
+                <span class="logo-badge">Smart Study 🧠</span>
+            </a>
+            <div class="header-controls">
+                <button id="ai-toggle-header" class="icon-button" aria-label="تشغيل مساعد الذكاء الاصطناعي">
+                    <i class="fas fa-brain"></i>
+                </button>
+                <button id="dark-mode-toggle" class="icon-button" aria-label="تفعيل الوضع الداكن">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <button id="logout-button" class="icon-button" aria-label="تسجيل الخروج">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <header class="page-title-header">
+            <h1 id="subject-title-display">
+                <i id="subject-icon-display" class="fas fa-spinner fa-spin"></i>
+                جارٍ تحميل المادة...
+            </h1>
+        </header>
+
+        <div class="lesson-layout">
+            
+            <aside class="lesson-list">
+                <h3>دروس المادة</h3>
+                <div id="lessons-list-container">
+                    </div>
+            </aside>
+
+            <section class="lesson-content-card">
+                <h2 id="lesson-title-display">اختر درسًا للبدء</h2>
+                
+                <div id="lesson-body-display" class="lesson-content-text">
+                    <p>الرجاء اختيار أحد الدروس من القائمة الجانبية لعرض المحتوى هنا.</p>
+                </div>
+                
+                <button id="start-quiz-button" classs="cta-button" style="display: none;">
+                    <i class="fas fa-pencil-alt"></i> اختبر نفسك الآن
+                </button>
+            </section>
+        </div>
+
+    </main>
+
+    <button id="ai-fab" class="ai-fab" aria-label="فتح مساعد الذكاء الاصطناعي">
+        🤖
+    </button>
+
+    <footer class="main-footer">
+        <p>© 2025 Smart Study — جميع الحقوق محفوظة.</p>
+        <p>تم التطوير بواسطة سعد وليد.</p>
+    </footer>
+
+    <script src="data.js"></script> 
+    <script src="script.js"></script>
+    <script src="lesson.js"></script>
+</body>
+</html>

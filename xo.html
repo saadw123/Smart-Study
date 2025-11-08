@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script>
+        // **الكود النهائي لمنع الوميض (Anti-FOUC) - يجب وضعه كأول شيء داخل <head>**
+        (function() {
+            const theme = localStorage.getItem('theme');
+            // نطبق الكلاس مباشرة على عنصر الجذر <html>
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode'); 
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تيك تاك تو (XO)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        .xo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+        }
+
+        #status-message {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--color-primary);
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            margin-bottom: 20px;
+            /* === (تثبيت لون الفواصل ليكون أبيض مرئي في كل الأوضاع) === */
+            background-color: #475569; 
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .board {
+            /* === (التعديل 2: نعيد الفواصل لتكون رمادية فاتحة في الوضع الداكن) === */
+            background-color: #64748b; /* استخدام لون رمادي فاتح ليكون مرئيًا */
+        }
+
+        .cell {
+            /* لون الخلية نفسها */
+            background-color: var(--bg-secondary); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            font-weight: 900;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.1s;
+            /* === (إضافة خط حول الخلية في الوضع الفاتح لضمان رؤيتها) === */
+            border: 1px solid #e2e8f0; 
+        }
+
+        /* (تعديل صغير إضافي) */
+        body.dark-mode .cell {
+            /* لون الخلية نفسها داكن لتمييزها عن الفواصل */
+            background-color: var(--dark-bg-primary); 
+            color: var(--dark-text-primary); 
+            border-color: #334155; /* حدود أغمق */
+        }
+
+        .cell:hover:empty {
+            background-color: var(--bg-primary);
+        }
+
+        /* تنسيق الخاسر/الفائز */
+        .winner {
+            background-color: var(--color-accent) !important;
+            color: white;
+        }
+        .draw {
+            background-color: #f59e0b !important;
+        }
+
+        /* الأزرار الإضافية */
+        #restart-btn {
+            background-color: #ef4444;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        body.dark-mode .board {
+            /* لون الفواصل في الوضع الداكن: نجعلها رمادي فاتح لكي نراها على خلفية أغمق */
+            background-color: #475569; 
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+    <header class="main-header">
+        <div class="container header-content">
+            
+            <div class="logo-and-nav">
+                <a href="index.html" class="logo-container">
+                    <span class="logo-badge">Smart Study 🧠</span>
+                </a>
+                
+                
+            </div>
+
+            <section class="notebook-header-display">
+                 <nav class="main-nav-center">
+                    <a href="notebook.html" class="nav-link-pill">الكراسة</a>
+                    <a href="games.html" class="nav-link-pill">التسلية</a>
+                </nav>
+            </section>
+
+            <div class="header-controls">
+                <button id="ai-toggle-header" class="icon-button" aria-label="تشغيل مساعد الذكاء الاصطناعي">
+                    <i class="fas fa-brain"></i>
+                </button>
+                <button id="dark-mode-toggle" class="icon-button" aria-label="تفعيل الوضع الداكن">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <button id="logout-button" class="icon-button" aria-label="تسجيل الخروج">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container xo-container">
+        
+        <header class="page-title-header">
+            <h1><i class="fas fa-times-circle"></i> تيك تاك تو (XO)</h1>
+        </header>
+
+        <div id="status-message">ابدأ اللعب (أنت X)</div>
+
+        <div class="board" id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <button id="restart-btn" class="cta-button secondary">إعادة اللعب</button>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script src="xo.js"></script>
+
+</body>
+</html>

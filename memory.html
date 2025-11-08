@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script>
+        // **الكود النهائي لمنع الوميض (Anti-FOUC) - يجب وضعه كأول شيء داخل <head>**
+        (function() {
+            const theme = localStorage.getItem('theme');
+            // نطبق الكلاس مباشرة على عنصر الجذر <html>
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode'); 
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحدي الذاكرة - Smart Study</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="memory.css"> </head>
+<body class="light-mode">
+
+    <header class="main-header">
+        <div class="container header-content">
+            
+            <div class="logo-and-nav">
+                <a href="index.html" class="logo-container">
+                    <span class="logo-badge">Smart Study 🧠</span>
+                </a>
+                
+                
+            </div>
+
+            <section class="notebook-header-display">
+                 <nav class="main-nav-center">
+                    <a href="notebook.html" class="nav-link-pill">الكراسة</a>
+                    <a href="games.html" class="nav-link-pill">التسلية</a>
+                </nav>
+            </section>
+
+            <div class="header-controls">
+                <button id="ai-toggle-header" class="icon-button" aria-label="تشغيل مساعد الذكاء الاصطناعي">
+                    <i class="fas fa-brain"></i>
+                </button>
+                <button id="dark-mode-toggle" class="icon-button" aria-label="تفعيل الوضع الداكن">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <button id="logout-button" class="icon-button" aria-label="تسجيل الخروج">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="container">
+        
+        <header class="page-title-header">
+            <h1><i class="fas fa-brain"></i> تحدي الذاكرة</h1>
+        </header>
+
+        <div class="memory-game-container">
+            <div class="game-info">
+                <div class="info-item">
+                    <span>الوقت:</span>
+                    <span id="timer">00:00</span>
+                </div>
+                <div class="info-item">
+                    <span>الحركات:</span>
+                    <span id="moves">0</span>
+                </div>
+                <div class="info-item">
+                    <span>الأزواج المتبقية:</span>
+                    <span id="remaining-pairs"></span>
+                </div>
+            </div>
+
+            <div id="memory-board" class="memory-board">
+                </div>
+
+            <div class="game-controls">
+                <button id="restart-button" class="cta-button">
+                    <i class="fas fa-redo"></i> إعادة اللعبة
+                </button>
+                <button id="hint-button" class="cta-button secondary">
+                    <i class="fas fa-lightbulb"></i> تلميح (3)
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script> <script src="memory.js"></script> </body>
+</html>

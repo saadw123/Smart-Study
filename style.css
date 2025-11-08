@@ -1,0 +1,1097 @@
+/* ==== Global Setup & Variables ==== */
+:root {
+    /* Light Mode Palette */
+    --bg-primary: #f5f7fa;        /* أزرق رمادي فاتح جدًا */
+    --bg-secondary: #ffffff;      /* أبيض نقي (للكروت) */
+    --text-primary: #0f172a;      /* كحلي غامق */
+    --text-secondary: #64748b;    /* رمادي مزرق */
+    --color-primary: #2563eb;     /* أزرق احترافي */
+    --color-accent: #10b981;      /* أخضر معتدل */
+    --color-note-bg: #fef9c3;     /* أصفر دافئ (للنصائح) */
+    --color-note-text: #713f12;   /* (لون نص للنصائح) */
+    
+    /* Dark Mode Palette (سيتم تفعيله عبر كلاس .dark-mode) */
+    --dark-bg-primary: #0a1424;   /* كحلي غامق جدًا */
+    --dark-bg-secondary: #1e293b; /* (سطح أغمق للكروت) */
+    --dark-text-primary: #e2e8f0; /* أبيض مائل للأزرق */
+    --dark-text-secondary: #94a3b8;/* (رمادي أفتح) */
+
+    /* Transitions */
+    --transition-speed: 0.3s ease;
+}
+
+/* Dark Mode Toggles */
+body.dark-mode {
+    --bg-primary: var(--dark-bg-primary);
+    --bg-secondary: var(--dark-bg-secondary);
+    --text-primary: var(--dark-text-primary);
+    --text-secondary: var(--dark-text-secondary);
+    --color-note-bg: #3f3f46; /* (خلفية ملاحظة داكنة) */
+    --color-note-text: var(--dark-text-primary);
+}
+
+/* ==== Basic Reset & Font ==== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    color: var(--text-primary);
+    transition: color var(--transition-speed);
+}
+
+p {
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+    transition: color var(--transition-speed);
+}
+
+/* ==== 1. Header ==== */
+.main-header {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+body.dark-mode .main-header {
+    border-bottom-color: #334155;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container .logo-badge {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+
+
+.header-controls {
+    display: flex;
+    gap: 15px;
+}
+
+/* (في ملف style.css) */
+
+/* === إصلاح أيقونات الهيدر (المشكلة 1) === */
+
+.icon-button {
+    /* (إضافة خلفية لتكون مرئية دائماً) */
+    background-color: var(--bg-secondary); 
+    border: 1px solid #cbd5e1; 
+    color: var(--text-secondary); /* لون رمادي فاتح في الوضع العادي */
+    font-size: 1.1rem; 
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+/* التعديل: تثبيت لون الأيقونة ليكون فاتحاً وواضحاً في الوضع الداكن */
+body.dark-mode .icon-button {
+    background-color: var(--dark-bg-secondary); /* لون أغمق لخلفية الزر */
+    border-color: #475569; /* حدود مرئية */
+    color: var(--dark-text-primary); /* لون فاتح جداً للأيقونة نفسها */
+}
+
+/* ... (باقي كود .icon-button:hover كما هو) ...
+
+.icon-button:hover {
+    background-color: var(--bg-primary);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+body.dark-mode .icon-button {
+    border-color: var(--text-secondary);
+}
+
+/* ==== 2. Tips Section ==== */
+.tips-section {
+    padding: 20px 0;
+}
+
+.tip-note {
+    background-color: var(--color-note-bg);
+    color: var(--color-note-text);
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    border-right: 5px solid var(--color-primary);
+}
+
+/* أنيميشن لتبديل النصائح (يتم التحكم به بـ JS) */
+.tip-note span {
+    display: inline-block;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.tip-note span.fade-out {
+    opacity: 0;
+}
+
+/* ==== 3. Subjects Grid ==== */
+.subjects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.subject-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: all var(--transition-speed);
+    cursor: pointer;
+}
+
+body.dark-mode .subject-card {
+    border-color: #334155;
+}
+
+.subject-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.1);
+}
+
+.subject-card .card-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.subject-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+}
+
+.subject-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* ==== 4. About Section ==== */
+.about-section {
+    padding: 30px 0;
+}
+
+.about-card {
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+body.dark-mode .about-card {
+    border-color: #334155;
+}
+
+.about-card h3 {
+    margin-bottom: 10px;
+    color: var(--color-primary);
+}
+
+.about-card p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ==== 5. Floating AI Button ==== */
+.ai-fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px; /* (في RTL، الـ 'right' هو الصحيح لأسفل اليمين) */
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #38bdf8, #2563eb); /* تدرج الأزرق */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    z-index: 1000;
+}
+
+.ai-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5);
+}
+
+/* ==== 6. Footer ==== */
+.main-footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 30px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+body.dark-mode .main-footer {
+    border-top-color: #334155;
+}
+
+/* ==== Responsive Design ==== */
+@media (max-width: 768px) {
+    .subjects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .subjects-grid {
+        grid-template-columns: 1fr; /* عمود واحد */
+    }
+
+    .ai-fab {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .logo-container .logo-badge {
+        font-size: 1rem;
+    }
+}
+
+
+/* ==== إضافات لـ style.css (لصفحات الدروس والاختبارات) ==== */
+
+/* ==== 1. Lesson Page Styles (lesson.html) ==== */
+
+/* (في ملف style.css - في قسم Lesson Page Styles) */
+
+/* ... (التنسيقات السابقة) ... */
+
+.lesson-content-card #lesson-body-display {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    
+    /* === (جديد) إضافة مسافة كبيرة لآخر عنصر في المحتوى === */
+    /* هذا يضمن وجود مسافة قبل زر الاختبار */
+    padding-bottom: 25px; 
+    border-bottom: 1px dashed var(--text-secondary); /* إضافة خط فاصل أنيق */
+    margin-bottom: 25px;
+}
+
+
+.page-title-header {
+    padding: 20px 0;
+    border-bottom: 2px solid var(--color-primary);
+    margin-bottom: 30px;
+}
+
+.page-title-header h1 {
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.lesson-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* قائمة الدروس (الجانبية) */
+.lesson-list {
+    flex: 0 0 300px; /* عرض ثابت 300px */
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    position: sticky; /* لجعلها تثبت عند النزول */
+    top: 20px;
+}
+
+.lesson-list h3 {
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.lesson-list-item {
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: all var(--transition-speed);
+}
+
+.lesson-list-item:hover {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.lesson-list-item.active {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+/* محتوى الدرس (الرئيسي) */
+.lesson-content-card {
+    flex: 1; /* يأخذ باقي المساحة */
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 30px;
+    min-height: 400px;
+}
+
+.lesson-content-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.lesson-content-card #lesson-body-display {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.lesson-content-card .lesson-content-text {
+    /* هذه الخاصية تجبر المتصفح على احترام فواصل الأسطر */
+    white-space: pre-wrap; 
+}
+
+.lesson-content-card #lesson-body-display p {
+    margin-bottom: 15px;
+}
+.lesson-content-card #lesson-body-display ul,
+.lesson-content-card #lesson-body-display ol {
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
+.lesson-content-card #lesson-body-display img.lesson-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+
+
+
+/* (في ملف style.css - ابحث عن .cta-button) */
+
+/* 1. تنسيق الأزرار الرئيسية الموحدة (مثل زر ابدأ الاختبار في الصورة) */
+.cta-button {
+    text-decoration: none; /* يشيل الخط */
+    display: inline-block; /* يخلي الزر يتصرف كزر مش كنص */
+    /* الخلفية والتدرج */
+    background: linear-gradient(135deg, #3b82f6, #2563eb); /* تدرج أزرق بارز */
+    color: #ffffff; /* نص أبيض */
+    border: none;
+    padding: 9px 22px; /* حجم كبير للزر */
+    font-size: 1.3rem; /* خط كبير وواضح */
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    border-radius: 12px; /* حواف مستديرة قليلاً */
+    cursor: pointer;
+    transition: all 0.3s ease; /* سرعة انتقال سلسة */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; 
+    gap: 12px; /* مسافة بين النص والأيقونة */
+    box-shadow: 0 8px 15px rgba(37, 99, 235, 0.4); /* ظل عميق وواضح */
+}
+
+.cta-button:hover {
+    background: linear-gradient(135deg, #2563eb, #1e40af); /* تدرج أزرق أغمق عند التمرير */
+    transform: translateY(-3px); /* تأثير رفع لطيف */
+    box-shadow: 0 12px 20px rgba(37, 99, 235, 0.6); /* ظل أعمق عند التمرير */
+}
+
+.cta-button:disabled {
+    background: #94a3b8; /* رمادي عند التعطيل */
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* الأزرار الثانوية إذا كانت موجودة (مثل زر "العودة") */
+.cta-button.secondary {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid #cbd5e1;
+    box-shadow: none;
+}
+.cta-button.secondary:hover {
+    background-color: var(--bg-primary);
+    border-color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
+
+#start-quiz-button {
+    background: linear-gradient(135deg, #3b82f6, #2563eb); /* تدرج أزرق بارز */
+    color: #ffffff; /* نص أبيض */
+    border: none;
+    padding: 9px 22px; /* حجم كبير للزر */
+    font-size: 1.3rem; /* خط كبير وواضح */
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    border-radius: 12px; /* حواف مستديرة قليلاً */
+    cursor: pointer;
+    transition: all 0.3s ease; /* سرعة انتقال سلسة */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; 
+    gap: 12px; /* مسافة بين النص والأيقونة */
+    box-shadow: 0 8px 15px rgba(37, 99, 235, 0.4); /* ظل عميق وواضح */
+}
+#start-quiz-button:hover {
+    background: linear-gradient(135deg, #2563eb, #1e40af); /* تدرج أزرق أغمق عند التمرير */
+    transform: translateY(-3px); /* تأثير رفع لطيف */
+    box-shadow: 0 12px 20px rgba(37, 99, 235, 0.6); /* ظل أعمق عند التمرير */ 
+}
+
+
+
+/* ==== 2. Quiz Page Styles (quiz.html) ==== */
+.quiz-container {
+    max-width: 800px;
+}
+
+.quiz-card {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 30px;
+    margin-top: 20px;
+}
+
+/* شاشة البداية */
+#quiz-intro {
+    text-align: center;
+}
+#quiz-intro h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--color-primary);
+}
+#quiz-intro p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+/* شاشة الأسئلة */
+#quiz-main h3 { /* نص السؤال */
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+.quiz-progress {
+    text-align: left;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.quiz-option {
+    display: block;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+.quiz-option input[type="radio"] {
+    margin-left: 10px; /* (هام لـ RTL) */
+    accent-color: var(--color-primary);
+}
+.quiz-option:hover {
+    border-color: var(--color-primary);
+    background-color: var(--bg-primary);
+}
+.quiz-option.selected {
+    border-color: var(--color-primary);
+    background-color: #eff6ff; /* (أزرق فاتح جدًا) */
+    box-shadow: 0 2px 5px rgba(37, 99, 235, 0.1);
+}
+
+/* شاشة النتائج */
+.result-card {
+    text-align: center;
+    border-radius: 12px;
+    padding: 30px;
+    transition: all var(--transition-speed);
+}
+#result-icon {
+    font-size: 3rem;
+    margin: 15px 0;
+}
+#result-score {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 30px;
+}
+.result-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* ألوان النتائج (حسب المواصفات) */
+.result-card.success {
+    background-color: #f0fdf4; /* أخضر خفيف */
+    border: 2px solid var(--color-accent);
+}
+.result-card.success #result-title {
+    color: #15803d; /* أخضر غامق */
+}
+.result-card.fail {
+    background-color: #fef2f2; /* أحمر خفيف */
+    border: 2px solid #ef4444; /* أحمر ناعم */
+}
+.result-card.fail #result-title {
+    color: #b91c1c; /* أحمر غامق */
+}
+
+
+/* ==== 3. Dark Mode (إضافات) ==== */
+body.dark-mode .lesson-list,
+body.dark-mode .lesson-content-card,
+body.dark-mode .quiz-card {
+    border-color: #334155;
+}
+
+body.dark-mode .lesson-list h3 {
+    border-bottom-color: #334155;
+}
+
+body.dark-mode .lesson-list-item:hover {
+    background-color: var(--dark-bg-primary);
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .lesson-list-item.active {
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
+
+body.dark-mode .cta-button.secondary {
+    border-color: #475569;
+}
+body.dark-mode .cta-button.secondary:hover {
+    background-color: var(--dark-bg-primary);
+    border-color: var(--dark-text-primary);
+}
+
+body.dark-mode .quiz-option {
+    border-color: #475569;
+}
+body.dark-mode .quiz-option:hover {
+    border-color: var(--color-primary);
+    background-color: var(--dark-bg-primary);
+}
+body.dark-mode .quiz-option.selected {
+    background-color: #0f172a; /* (كحلي أغمق قليلاً) */
+}
+
+body.dark-mode .result-card.success {
+    background-color: #052e16; /* (أخضر داكن) */
+    border-color: var(--color-accent);
+}
+body.dark-mode .result-card.success #result-title {
+    color: #a7f3d0; /* (أخضر فاتح) */
+}
+
+body.dark-mode .result-card.fail {
+    background-color: #450a0a; /* (أحمر داكن) */
+    border-color: #ef4444;
+}
+body.dark-mode .result-card.fail #result-title {
+    color: #fecaca; /* (أحمر فاتح) */
+}
+
+
+/* ==== 4. Responsive (إضافات) ==== */
+@media (max-width: 900px) {
+    .lesson-layout {
+        flex-direction: column;
+    }
+    .lesson-list {
+        flex: 0 0 auto; /* إلغاء العرض الثابت */
+        width: 100%;
+        position: static; /* إلغاء التثبيت */
+    }
+}
+
+/* إزالة الخط من أسفل الشعار عندما يكون رابطًا */
+.logo-container {
+    text-decoration: none; /* هذا السطر يزيل الخط السفلي */
+}
+
+.logo-container:hover .logo-badge {
+    /* يمكنك إضافة تأثيرات أخرى عند المرور بالماوس هنا إذا أردت */
+    /* مثلاً: تغيير اللون أو تكبير النص قليلاً */
+    /* color: var(--primary-color); */
+    /* transform: scale(1.02); */
+}
+
+
+
+
+
+
+
+/* =============================================== */
+/* 5. تنسيقات الكراسة (Notebook) */
+/* =============================================== */
+
+.notebook-area {
+    margin-top: 30px;
+}
+
+.note-input-area {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-small);
+    margin-bottom: 30px;
+}
+
+#note-title-input,
+#note-text-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+#note-title-input {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#note-text-input {
+    min-height: 150px;
+    resize: vertical;
+}
+
+#save-note-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+}
+
+/* تنسيق قائمة الملاحظات */
+.notes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.note-card {
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-medium);
+    border-right: 5px solid var(--primary-color); /* شريط جانبي مميز */
+    position: relative;
+    white-space: pre-wrap; /* للحفاظ على تنسيق النص المكتوب */
+}
+
+.note-card h3 {
+    margin-top: 0;
+    color: var(--primary-color-dark);
+    font-size: 1.2em;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.note-card p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.delete-note-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    color: var(--text-color-light);
+    cursor: pointer;
+    font-size: 1.2em;
+    opacity: 0.7;
+    transition: color 0.2s, opacity 0.2s;
+}
+
+.delete-note-btn:hover {
+    color: var(--error-color);
+    opacity: 1;
+}
+
+#no-notes-message {
+    grid-column: 1 / -1; /* لجعل رسالة "لا توجد ملاحظات" تمتد على كل الأعمدة */
+    text-align: center;
+    color: var(--text-color-light);
+    font-size: 1.2em;
+    padding: 30px 0;
+}
+
+
+
+/* =============================================== */
+/* 5. تنسيقات شريط التنقل والكراسة (Notebook Styling) */
+/* =============================================== */
+
+/* تنسيقات الشريط العلوي لربط الشعار والكراسة */
+.logo-and-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* مسافة بين الشعار ورابط الكراسة */
+}
+
+.main-nav .nav-link {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.main-nav .nav-link:hover,
+.main-nav .nav-link.active {
+    color: var(--color-primary);
+    background-color: var(--bg-primary);
+}
+
+body.dark-mode .main-nav .nav-link:hover,
+body.dark-mode .main-nav .nav-link.active {
+    background-color: var(--dark-bg-secondary);
+    color: var(--dark-text-primary);
+}
+
+/* --- تنسيقات واجهة الكراسة نفسها (في notebook.html) --- */
+
+.main-title {
+    margin-top: 30px;
+    font-size: 2.2rem;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.note-input-area {
+    /* نستخدم تنسيقات البطاقات الأساسية */
+    background-color: var(--bg-secondary);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+/* حقول الإدخال في الكراسة */
+#note-title-input,
+#note-text-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Cairo', sans-serif;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+#note-title-input:focus, #note-text-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+#note-text-input {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* زر الحفظ */
+#save-note-btn {
+    width: 100%;
+    /* يستخدم تنسيق .cta-button */
+}
+
+/* تنسيق قائمة الملاحظات */
+.notes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.note-card {
+    background-color: var(--bg-secondary);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid var(--color-accent); /* شريط جانبي أخضر مميز */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: relative;
+    white-space: pre-wrap; /* للحفاظ على تنسيق النص المكتوب */
+}
+
+.note-card h3 {
+    font-size: 1.1em;
+    color: var(--text-primary);
+    border-bottom: 1px dashed var(--text-secondary);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.note-card p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.delete-note-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    color: #ef4444; /* أحمر */
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: transform 0.2s;
+}
+
+.delete-note-btn:hover {
+    transform: scale(1.1);
+}
+
+#no-notes-message {
+    grid-column: 1 / -1; 
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.2em;
+    padding: 30px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============================================== */
+/* 5. تنسيق زر التنقل في الوسط (الكراسة) */
+/* =============================================== */
+
+/* (نحتاج لتعريف خاصية text-decoration: none; هنا لإزالة الخط السفلي من الشعار) */
+.logo-container a.logo-badge-link {
+    text-decoration: none;
+}
+
+/* (القسم الأوسط: زر الكراسة) */
+
+.main-nav-center a {
+    margin: 0 10px; /* تضيف 10 بكسل يمين وشمال بين الزرين */
+}
+
+
+.main-nav-center {
+    
+    flex-basis: 33.33%;
+    display: flex;
+    justify-content: center; /* (توسيط الزر) */
+}
+
+.main-nav-center .nav-link-pill {
+    display: block;
+    padding: 10px 28px; /* حشوة كبيرة لجعله ممدودًا */
+    
+    /* التصميم المطابق للوصف: رمادي-أزرق داكن */
+    background-color: #334155; 
+    color: var(--dark-text-primary); /* نص أبيض فاتح */
+    
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    border-radius: 999px; /* (حواف دائرية بالكامل pill-shaped) */
+    transition: all 0.2s ease;
+    white-space: nowrap; 
+}
+
+.main-nav-center .nav-link-pill:hover {
+    background-color: #475569; /* أغمق قليلاً عند التمرير */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* (تنسيق الزر في الوضع الفاتح) */
+body:not(.dark-mode) .main-nav-center .nav-link-pill {
+     background-color: #e2e8f0; /* رمادي فاتح جداً */
+     color: var(--text-primary); /* نص داكن */
+     border: 1px solid #cbd5e1;
+}
+body:not(.dark-mode) .main-nav-center .nav-link-pill:hover {
+     background-color: #cbd5e1;
+}
+
+
+
+
+
+
+
+/* =============================================== */
+/* 9. تنسيق بطاقات الألعاب (Games Cards) */
+/* =============================================== */
+
+/* تخصيص بطاقة اللعبة لتمييزها عن المادة */
+.subject-card.game-card {
+    /* تغيير خلفية البطاقة للأخضر الفاتح */
+    background-color: #f0fdf4; 
+    border: 1px solid var(--color-accent); /* إطار أخضر */
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+}
+
+.subject-card.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(16, 185, 129, 0.3);
+}
+
+.game-card .card-icon {
+    /* تخصيص لون الأيقونة */
+    color: var(--color-accent) !important; 
+    font-size: 2.2rem;
+}
+
+.game-card .cta-button.secondary {
+    /* تنسيق زر 'إلعب الآن' ليكون ملائماً */
+    background-color: var(--color-primary); /* أزرق */
+    color: white;
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    margin-top: 10px;
+    box-shadow: none;
+    transform: none;
+}
+.game-card .cta-button.secondary:hover {
+    background-color: #1d4ed8; 
+}
+
+/* دعم الوضع الليلي لبطاقات الألعاب */
+body.dark-mode .subject-card.game-card {
+    background-color: #0d302a; /* أخضر داكن في الوضع الليلي */
+    border-color: var(--color-accent);
+}
+body.dark-mode .game-card .card-icon {
+    color: #34d399 !important; /* أخضر فاتح مرئي */
+}
+
+
+
+/* =============================================== */
+/* 10. تنسيق شبكة الألعاب Games Grid */
+/* =============================================== */
+
+/* لضمان أن الألعاب تظهر في شبكة مكونة من أعمدة متعددة */
+.games-grid {
+    display: grid;
+    /* ضبط الأعمدة لتكون مرنة (300 بكسل كحد أدنى للعرض) */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+/* ملاحظة: التنسيقات الخاصة بـ .subject-card.game-card و .game-card .cta-button.secondary 
+   التي أضفناها سابقاً ستظل تعمل بشكل صحيح لأنها تستهدف الفئة المشتركة (game-card) */
+
+
+
+   /* =============================================== */
+/* 7. تنسيقات صفحة التسجيل والدخول (Auth Pages) */
+/* =============================================== */
+
+/* تثبيت الأزرار في أعلى اليسار */
+.auth-header-controls {
+    position: fixed;
+    top: 20px;
+    left: 20px; /* لليسار في RTL */
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+}

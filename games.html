@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script>
+        // **الكود النهائي لمنع الوميض (Anti-FOUC) - يجب وضعه كأول شيء داخل <head>**
+        (function() {
+            const theme = localStorage.getItem('theme');
+            // نطبق الكلاس مباشرة على عنصر الجذر <html>
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode'); 
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التسلية - Smart Study</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="light-mode">
+
+
+    <header class="main-header">
+        <div class="container header-content">
+            
+            <div class="logo-and-nav">
+                <a href="index.html" class="logo-container">
+                    <span class="logo-badge">Smart Study 🧠</span>
+                </a>
+                
+                
+            </div>
+
+            <section class="notebook-header-display">
+                 <nav class="main-nav-center">
+                    <a href="notebook.html" class="nav-link-pill">الكراسة</a>
+                    <a href="games.html" class="nav-link-pill">التسلية</a>
+                </nav>
+            </section>
+
+            <div class="header-controls">
+                <button id="ai-toggle-header" class="icon-button" aria-label="تشغيل مساعد الذكاء الاصطناعي">
+                    <i class="fas fa-brain"></i>
+                </button>
+                <button id="dark-mode-toggle" class="icon-button" aria-label="تفعيل الوضع الداكن">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <button id="logout-button" class="icon-button" aria-label="تسجيل الخروج">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+
+    <main class="container">
+        
+        <header class="page-title-header">
+            <h1><i class="fas fa-gamepad"></i> ألعاب تعليمية ومسابقات</h1>
+        </header>
+
+        <section class="games-grid">
+            
+            <div class="subject-card game-card">
+                <div class="card-icon"><i class="fas fa-times-circle" style="color: #6366f1;"></i></div>
+                <h3>تيك تاك تو (XO)</h3>
+                <p>تحدَّ صديقك أو الحاسوب في لعبة الذكاء الشهيرة.</p>
+                <a href="xo.html" class="cta-button secondary">إلعب الآن</a> 
+            </div>
+
+            <div class="subject-card game-card">
+                <div class="card-icon"><i class="fas fa-th-large" style="color: #10b981;"></i></div>
+                <h3>الكلمات المتقاطعة</h3>
+                <p>اختبر معلوماتك العامة في مسابقة ممتعة.</p>
+                <a href="crossword.html" class="cta-button secondary">إلعب الآن</a>
+            </div>
+            
+            <div class="subject-card game-card">
+                <div class="card-icon"><i class="fas fa-copy" style="color: #f97316;"></i></div>
+                <h3>تحدي الذاكرة</h3>
+                <p>درّب عقلك على التركيز وتذكر الأزواج بسرعة.</p>
+                <a href="memory.html" class="cta-button secondary">إلعب الآن</a>
+            </div>
+            
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>© 2025 Smart Study — جميع الحقوق محفوظة.</p>
+        <p>تم التطوير بواسطة سعد وليد SW.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

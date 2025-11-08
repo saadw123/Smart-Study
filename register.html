@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل جديد - Smart Study</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode'); 
+            }
+        })();
+    </script>
+</head>
+<body class="light-mode auth-page">
+
+    <div class="auth-header-controls">
+        <a href="index.html" class="icon-button"><i class="fas fa-home"></i></a> 
+        <button id="dark-mode-toggle" class="icon-button" aria-label="تفعيل الوضع الداكن">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+    <main class="auth-container">
+        <form id="register-form" class="auth-form">
+            <span class="logo-badge auth-logo">Smart Study 🧠</span>
+            <h2>إنشاء حساب جديد</h2>
+
+            <p class="auth-switch">
+                لديك حساب بالفعل؟ <a href="login.html">سجل الدخول</a>
+            </p>
+            
+            <div id="error-message" class="auth-error" style="display: none;"></div>
+
+            <div class="form-group">
+                <label for="name">الاسم الكامل</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" required>
+            </div>
+            
+            <button type="submit" class="cta-button auth-button">إنشاء الحساب</button>
+            
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

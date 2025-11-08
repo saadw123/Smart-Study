@@ -1,0 +1,383 @@
+/* admin.css - تنسيقات خاصة بلوحة تحكم المشرف */
+
+/* 1. شبكة الإحصائيات */
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.stat-card .icon {
+    font-size: 2.5rem;
+    padding: 15px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+}
+/* ألوان الأيقونات */
+.stat-card.users .icon {
+    color: #2563eb; /* أزرق */
+    background-color: #eff6ff;
+}
+.stat-card.subjects .icon {
+    color: #10b981; /* أخضر */
+    background-color: #f0fdf4;
+}
+.stat-card.lessons .icon {
+    color: #f59e0b; /* أصفر */
+    background-color: #fffbeb;
+}
+
+.stat-card .info h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.stat-card .info p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* 2. كارت إدارة المحتوى */
+.admin-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+.admin-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+.admin-card .form-group {
+    margin-bottom: 20px;
+}
+
+/* 3. جدول المحتوى */
+.content-table-wrapper {
+    overflow-x: auto; /* للسماح بالتمرير على الشاشات الصغيرة */
+}
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+    text-align: right;
+    border-bottom: 1px solid #e2e8f0;
+}
+.content-table th {
+    background-color: var(--bg-primary);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.content-table td {
+    color: var(--text-secondary);
+}
+.content-table td .icon {
+    margin-left: 8px;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+}
+
+/* 4. أزرار التحكم (تعديل/حذف) */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+.action-btn {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.action-btn.edit {
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+.action-btn.edit:hover {
+    background-color: #dbeafe;
+}
+.action-btn.delete {
+    background-color: #fef2f2;
+    color: #ef4444;
+}
+.action-btn.delete:hover {
+    background-color: #fee2e2;
+}
+
+/* 5. الوضع الليلي */
+body.dark-mode .stat-card,
+body.dark-mode .admin-card {
+    border-color: #334155;
+}
+body.dark-mode .admin-card h3 {
+    border-bottom-color: #334155;
+}
+body.dark-mode .content-table th {
+    background-color: #1e293b;
+}
+body.dark-mode .content-table td {
+    border-bottom-color: #334155;
+}
+body.dark-mode .stat-card.users .icon {
+    background-color: #1e3a8a;
+}
+body.dark-mode .stat-card.subjects .icon {
+    background-color: #064e3b;
+}
+body.dark-mode .stat-card.lessons .icon {
+    background-color: #78350f;
+}
+
+/* admin.css (إضافة تنسيقات جديدة) */
+
+/* 6. جدول المستخدمين */
+.content-table td .role-user {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+.content-table td .role-admin {
+    color: var(--color-primary); /* أزرق */
+    font-weight: 700;
+}
+.action-btn.promote {
+    background-color: #f0fdf4; /* أخضر فاتح */
+    color: #15803d;
+}
+.action-btn.promote:hover {
+    background-color: #dcfce7;
+}
+
+/* 7. النافذة المنبثقة (Modal) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    padding: 30px;
+    /* (نستخدم نفس كلاس .admin-card) */
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    left: 20px; /* (لأننا RTL) */
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1;
+}
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+
+/* admin.css (إضافة تنسيقات المحرر) */
+
+/* 8. محرر الدروس والاختبارات */
+.lesson-content-input {
+    width: 100%;
+    min-height: 120px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+body.dark-mode .lesson-content-input {
+    background-color: #0f172a;
+    border-color: #334155;
+}
+
+.quiz-option-editor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.quiz-option-editor input[type="radio"] {
+    accent-color: var(--color-primary);
+    width: 20px;
+    height: 20px;
+}
+.quiz-option-editor input[type="text"] {
+    flex: 1;
+    /* (إعادة استخدام تنسيق موجود) */
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem;
+    background-color: #fff;
+    color: var(--text-primary);
+}
+body.dark-mode .quiz-option-editor input[type="text"] {
+    background-color: #1e293b;
+    border-color: #475569;
+}
+
+/* admin.css (إضافة تنسيقات محرر الأيقونات) */
+
+/* 9. محرر الأيقونات (Icon Picker) */
+.icon-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 10px;
+    background-color: var(--bg-primary);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+body.dark-mode .icon-picker-grid {
+    background-color: #0f172a;
+    border-color: #334155;
+}
+
+.icon-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.icon-option:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+.icon-option.selected {
+    border-color: var(--color-primary);
+    background-color: #eff6ff; /* أزرق فاتح */
+    color: var(--color-primary);
+}
+body.dark-mode .icon-option.selected {
+    background-color: #1e3a8a;
+    border-color: #3b82f6;
+}
+
+/* admin.css (إضافة تنسيقات المعاينة) */
+
+/* 10. تنسيق المعاينة المباشرة داخل النافذة */
+#subject-card-preview {
+    background-color: var(--bg-primary); /* لون خلفية مختلف */
+    border: 2px dashed var(--color-primary); /* إطار متقطع */
+    box-shadow: none;
+    cursor: default;
+    text-align: center;
+}
+#subject-card-preview:hover {
+    transform: none; /* (إلغاء حركة الهوفر) */
+    box-shadow: none;
+}
+#subject-card-preview p {
+    color: var(--text-secondary);
+}
+body.dark-mode #subject-card-preview {
+    background-color: var(--dark-bg-primary);
+    border-color: var(--color-primary);
+}
+
+/* admin.css (إضافة تنسيقات حقول الإدخال) */
+
+/* 11. تحسين شكل حقول الإدخال (Inputs) و (Textareas) */
+.admin-card .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
+.admin-card .form-group input[type="text"],
+.admin-card .form-group input[type="password"],
+.admin-card .form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e2e8f0; /* (حدود بلون الخلفية) */
+    border-radius: 8px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem;
+    background-color: var(--bg-primary); /* (خلفية رمادية فاتحة) */
+    color: var(--text-primary);
+    transition: all var(--transition-speed);
+}
+
+.admin-card .form-group textarea {
+    min-height: 80px;
+    resize: vertical; /* (السماح بتغيير الحجم رأسيًا فقط) */
+}
+
+/* 12. تحسين الشكل عند الضغط (Focus) */
+.admin-card .form-group input[type="text"]:focus,
+.admin-card .form-group input[type="password"]:focus,
+.admin-card .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary); /* (حدود زرقاء) */
+    background-color: var(--bg-secondary); /* (خلفية بيضاء نقية) */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); /* (ظل أزرق) */
+}
+
+/* 13. دعم الوضع الليلي */
+body.dark-mode .admin-card .form-group input[type="text"],
+body.dark-mode .admin-card .form-group input[type="password"],
+body.dark-mode .admin-card .form-group textarea {
+    background-color: #0f172a; /* (خلفية كحلية داكنة) */
+    border-color: #334155;
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .admin-card .form-group input[type="text"]:focus,
+body.dark-mode .admin-card .form-group input[type="password"]:focus,
+body.dark-mode .admin-card .form-group textarea:focus {
+    background-color: #1e293b; /* (خلفية كحلية أفتح) */
+    border-color: var(--color-primary);
+}

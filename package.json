@@ -1,0 +1,30 @@
+{
+  "name": "smart-study",
+  "version": "1.0.0",
+  "description": "منصة تعليمية ذكية",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SAAD2769/smart-study1.git"
+  },
+  "keywords": [
+    "education",
+    "ai",
+    "node"
+  ],
+  "author": "Saad Waleed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SAAD2769/smart-study1/issues"
+  },
+  "homepage": "https://github.com/SAAD2769/smart-study1#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
