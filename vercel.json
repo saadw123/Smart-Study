@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "/(.*\\.(?:css|js|mp3|jpg|jpeg|png|ico|json))",
+      "dest": "/$1"
+    },
+    {
+      "src": "/login.html",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/register.html",
+      "dest": "/register.html"
+    },
+    {
+      "src": "/index.html",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/lesson.html",
+      "dest": "/lesson.html"
+    },
+    {
+      "src": "/quiz.html",
+      "dest": "/quiz.html"
+    },
+    {
+      "src": "/notebook.html",
+      "dest": "/notebook.html"
+    },
+    {
+      "src": "/games.html",
+      "dest": "/games.html"
+    },
+    {
+      "src": "/xo.html",
+      "dest": "/xo.html"
+    },
+    {
+      "src": "/memory.html",
+      "dest": "/memory.html"
+    },
+    {
+      "src": "/crossword.html",
+      "dest": "/crossword.html"
+    },
+    {
+      "src": "/ai.html",
+      "dest": "/ai.html"
+    },
+    {
+      "src": "/admin-dashboard.html",
+      "dest": "/admin-dashboard.html"
+    },
+    {
+      "src": "/edit-subject.html",
+      "dest": "/edit-subject.html"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    }
+  ]
+}
